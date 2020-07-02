@@ -6,21 +6,21 @@
     <title>BPH Login</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/slicknav.css">
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/slick.css">
-    <link rel="stylesheet" href="assets/css/nice-select.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/assets/css/slicknav.css">
+    <link rel="stylesheet" href="/assets/css/animate.min.css">
+    <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="/assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="/assets/css/slick.css">
+    <link rel="stylesheet" href="/assets/css/nice-select.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
     <style>
         #box{
             width:400px;
@@ -36,20 +36,21 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/logo.png" alt="">
+                    <img src="/assets/img/logo/logo.png" alt="">
                 </div>
             </div>
         </div>
     </div>
     
+    <div class="logo" style="position: absolute; left: 50px; top: 10px;">
+        <a href="/"><img src="/assets/img/logo/logo.png" alt=""></a>
+    </div>
       <main>
 
                         <div class="row align-items-center">
                             <!-- Logo -->
                             <div class="col-xl-2 col-lg-2 col-md-1">
-                                <div class="logo">
-                                    <a href="/"><img src="assets/img/logo/logo.png" alt=""></a>
-                                </div>
+                                
                             </div>
                         
              
@@ -61,14 +62,14 @@
             <br>
             <h4 class="widget_title" style="color: #2d2d2d;">Login</h4>
             <br>
-                        <form action="#">
+                        <form action="/users/login" method="POST">
                                 <div class="form-group">
                                     <input type="email" class="form-control" onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
+                                        onblur="this.placeholder = 'Enter email'" name="username" placeholder='Enter email' required>
                                 </div>
                                <div class="form-group">
                                     <input type="password" class="form-control" onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = 'Enter password'" placeholder='Enter Password' required>
+                                        onblur="this.placeholder = 'Enter password'" name="password" placeholder='Enter Password' required>
                                 </div>
                                 <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
                                     type="submit">Login</button>
@@ -77,13 +78,16 @@
             <a href="forgotpassword"><font  color="black">Forgot Password?</font></a>
             <br>
             <br>
+            <a href="/users/google"><font  color="blue">Register with google</font></a>
+            <br>
+            <br>
            
         </div>
           </div>
     </main>
     <footer>
         <!--? Footer Start-->
-        <div class="footer-area section-bg" data-background="assets/img/gallery/section_bg02.png">
+        <div class="footer-area section-bg" data-background="/assets/img/gallery/section_bg02.png">
             <div class="container">
                 <div class="footer-top footer-padding">
                     <div class="row d-flex justify-content-between">
@@ -91,7 +95,7 @@
                             <div class="single-footer-caption mb-50">
                                 <!-- logo -->
                                 <div class="footer-logo">
-                                    <a href="/"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
+                                    <a href="/"><img src="/assets/img/logo/logo2_footer.png" alt=""></a>
                                 </div>
                             </div>
                         </div>
@@ -101,7 +105,7 @@
                                 <div class="footer-tittle">
                                     <h4>Useful Links</h4>
                                     <ul>
-                                        <li><a href="/login">Login</a></li>
+                                        <li><a href="/users/login">Login</a></li>
                                         <li><a href="#">Policy</a></li>
                                         <li><a href="#">Terms & Conditions</a></li>
                                     </ul>
@@ -144,36 +148,36 @@
 
     <!-- JS here -->
 	
-    <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="/assets/js/vendor/modernizr-3.5.0.min.js"></script>
     <!-- Jquery, Popper, Bootstrap -->
-    <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="./assets/js/popper.min.js"></script>
-    <script src="./assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="/assets/js/popper.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
     <!-- Jquery Mobile Menu -->
-    <script src="./assets/js/jquery.slicknav.min.js"></script>
+    <script src="/assets/js/jquery.slicknav.min.js"></script>
 
     <!-- Jquery Slick , Owl-Carousel Plugins -->
-    <script src="./assets/js/owl.carousel.min.js"></script>
-    <script src="./assets/js/slick.min.js"></script>
+    <script src="/assets/js/owl.carousel.min.js"></script>
+    <script src="/assets/js/slick.min.js"></script>
     <!-- One Page, Animated-HeadLin -->
-    <script src="./assets/js/wow.min.js"></script>
-    <script src="./assets/js/animated.headline.js"></script>
+    <script src="/assets/js/wow.min.js"></script>
+    <script src="/assets/js/animated.headline.js"></script>
     
     <!-- Nice-select, sticky -->
-    <script src="./assets/js/jquery.nice-select.min.js"></script>
-    <script src="./assets/js/jquery.sticky.js"></script>
-    <script src="./assets/js/jquery.magnific-popup.js"></script>
+    <script src="/assets/js/jquery.nice-select.min.js"></script>
+    <script src="/assets/js/jquery.sticky.js"></script>
+    <script src="/assets/js/jquery.magnific-popup.js"></script>
 
     <!-- contact js -->
-    <script src="./assets/js/contact.js"></script>
-    <script src="./assets/js/jquery.form.js"></script>
-    <script src="./assets/js/jquery.validate.min.js"></script>
-    <script src="./assets/js/mail-script.js"></script>
-    <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
+    <script src="/assets/js/contact.js"></script>
+    <script src="/assets/js/jquery.form.js"></script>
+    <script src="/assets/js/jquery.validate.min.js"></script>
+    <script src="/assets/js/mail-script.js"></script>
+    <script src="/assets/js/jquery.ajaxchimp.min.js"></script>
     
     <!-- Jquery Plugins, main Jquery -->	
-    <script src="./assets/js/plugins.js"></script>
-    <script src="./assets/js/main.js"></script>
+    <script src="/assets/js/plugins.js"></script>
+    <script src="/assets/js/main.js"></script>
     
     </body>
 </html>

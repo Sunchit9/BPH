@@ -1,0 +1,386 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="x-ua-compatible" content="ie=edge">
+   <title><%= post.name_of_item%></title>
+   <meta name="description" content="">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+   <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <!-- CSS here -->
+   <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+   <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+   <link rel="stylesheet" href="/assets/css/slicknav.css">
+   <link rel="stylesheet" href="/assets/css/animate.min.css">
+   <link rel="stylesheet" href="/assets/css/magnific-popup.css">
+   <link rel="stylesheet" href="/assets/css/fontawesome-all.min.css">
+   <link rel="stylesheet" href="/assets/css/themify-icons.css">
+   <link rel="stylesheet" href="/assets/css/slick.css">
+   <link rel="stylesheet" href="/assets/css/nice-select.css">
+   <link rel="stylesheet" href="/assets/css/style.css">
+   <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+</head>
+
+<body>
+   <!--? Preloader Start -->
+   <div id="preloader-active">
+      <div class="preloader d-flex align-items-center justify-content-center">
+         <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+                  <img src="/assets/img/logo/logo.png" alt="">
+            </div>
+         </div>
+      </div>
+   </div>
+   <header>
+      <!--? Header Start -->
+      <div class="header-area header-transparent">
+              <div class="main-header  header-sticky">
+                  <div class="container-fluid">
+                      <div class="row align-items-center">
+                          <!-- Logo -->
+                          <div class="col-xl-2 col-lg-2 col-md-1">
+                              <div class="logo">
+                                  <a href="/"><img src="/assets/img/logo/logo.png" alt=""></a>
+                              </div>
+                          </div>
+                          <div class="col-xl-10 col-lg-8 col-md-8">
+                              <div class="menu-main d-flex align-items-center justify-content-end">
+                                 <% if(!currentuser){%>
+                                    <div class="header-right-btn f-right d-none d-lg-block ml-20">
+                                        <a href='/users/signup' class="border-btn header-btn">Join Now!</a>
+                                    </div>
+                                    <%}else{ if(currentuser.GoogleId==''){%>
+                                    
+                                       <h4><a href='/users/profile/<%= currentuser._id %>'><%=currentuser.displayName%></a></h4>
+                                       <%}else{%>
+
+                                           <h4><a href='/users/profile/<%= currentuser.id %>'><%=currentuser.displayName%></a></h4>
+
+                                           <%}%>
+                                   <div class="header-right-btn f-right d-none d-lg-block ml-20">
+                                       <a href='/users/logout' class="border-btn header-btn">Logout</a>
+                                   </div>
+                               <%}%>
+                              </div>
+                          </div>   
+                         
+                      </div>
+                  </div>
+              </div>
+      </div>
+      <!-- Header End -->
+  </header>
+   <main>
+      <!--? Hero Start -->
+      <div class="slider-area ">
+         
+               <div class="container">
+                  <div class="row">
+                     <div class="col-xl-12">
+                           <div class="hero-cap hero-cap2" style="margin-left: 50px; margin-top: 200px;">
+                              <h2>Product Details</h2>
+                           </div>
+                     </div>
+                  </div>
+               </div>
+         
+      </div>
+      <!-- Hero End -->
+      <!--================Blog Area =================-->
+      <section class="blog_area single-post-area section-padding">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-8 posts-list">
+                  <div class="single-post">
+                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                           <% var i=0; console.log("first"); post.images.forEach(function(image){ %>
+                          <li data-target="#carouselExampleIndicators" data-slide-to="<%= i %>" <% if(i==0 ) { console.log(i);%> class="active" <% } %> ></li>
+                          <% i=i+1; }) %>
+                        </ol>
+                        
+                        <div class="carousel-inner">
+                           <% var i=0; console.log("second"); post.images.forEach(function(image){ %>
+                          <div class="carousel-item <% if(i==0){ %> active <% }%> ">
+                           <a href="/<%=image%>"> <img src="/<%= image %>"" height=600 width =400  class="d-block w-100" alt="<%if(i==0){ %> First <%}if(i==1){ %> Second <%}if(i==2){ %> Third <%}%> slide"></a>
+                           </div>
+                          <% i=i+1; }) %>
+                        </div>
+                        
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="sr-only">Next</span>
+                        </a>
+                      </div>
+                     
+                                                      
+                     
+
+                     <div class="blog_details">
+                        <h2 style="color: #2d2d2d;"> 
+                           <%= post.name_of_item%>
+                        </h2>
+                        
+                        <p class="excert">
+                           <%= post.category_of_item%>
+                        </p>
+                        <ul class="blog-info-link mt-3 mb-4">
+                            <li><a href="#"><i class="fa fa-user"></i><%= post.material_of_item%></a></li>
+                            <li><a href="#"><i class="fa fa-comments"></i> <%= post.comments.length%> Comments</a></li>
+                         </ul>
+                     </div>
+                  </div>
+                  <div class="comments-area">
+                     <h4><%= post.comments.length %> Comments</h4>
+                     <div class="comment-list">
+
+                        <% post.comments.forEach(function(comment){ %>
+                        <div class="single-comment justify-content-between d-flex">
+                           <div class="user justify-content-between d-flex">
+                              <div class="thumb">
+                                 <img src="<%= comment.author.userphoto %>" alt="">
+                              </div>
+                              <div class="desc">
+                                 <p class="comment">
+                                    <%= comment.text %>
+                                 </p>
+                                 <div class="d-flex justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                       <i>by </i>
+                                       <h5> 
+                                          <a href="#">&nbsp; <%= comment.author.username %></a>
+                                       </h5>
+                                       <p class="date">&nbsp; &nbsp; <%=comment.updatedAt.toTimeString().substr(0,5) %> ,<%=comment.updatedAt.toDateString() %> </p>
+                                    </div>
+                                    <div class="reply-btn" style="position: absolute; right: 0;">
+                                       <a href="#" class="btn-reply text-uppercase">reply</a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <hr>
+                        <%})%>
+                     </div>
+                  </div>
+                  <div class="comment-form">
+
+                     <% if(currentuser){%>
+                     <h4>Leave a Reply</h4>
+                     <form class="form-contact comment_form" action="/<%= post._id %>/comment" method ="POST">
+                        <div class="row">
+                           <div class="col-12">
+                              <div class="form-group">
+                                 <textarea class="form-control w-100" name="comment_of_item" id="comment" cols="30" rows="9"
+                                    placeholder="Write Comment"></textarea>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <button type="submit" class="button button-contactForm btn_1 boxed-btn">Post Comment</button>
+                        </div>
+                     </form>
+                     <%}else{%>
+                        <a href="/users/login">Login to comment</a>
+                        <%}%>
+                  </div>
+              
+                
+                
+                 <div class="navigation-top">
+                     <div class="navigation-area">
+                        <div class="row">
+                           <div
+                              class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+                              <div class="thumb">
+                                 <a href="#">
+                                    <img class="img-fluid" src="/assets/img/post/preview.png" alt="">
+                                 </a>
+                              </div>
+                              <div class="arrow">
+                                 <a href="#">
+                                    <span class="lnr text-white ti-arrow-left"></span>
+                                 </a>
+                              </div>
+                              <div class="detials">
+                                 <p>Prev Post</p>
+                                 <a href="#">
+                                    <h4 style="color: #2d2d2d;">Space The Final Frontier</h4>
+                                 </a>
+                              </div>
+                           </div>
+                           <div
+                              class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+                              <div class="detials">
+                                 <p>Next Post</p>
+                                 <a href="#">
+                                    <h4 style="color: #2d2d2d;">Telescopes 101</h4>
+                                 </a>
+                              </div>
+                              <div class="arrow">
+                                 <a href="#">
+                                    <span class="lnr text-white ti-arrow-right"></span>
+                                 </a>
+                              </div>
+                              <div class="thumb">
+                                 <a href="#">
+                                    <img class="img-fluid" src="/assets/img/post/next.png" alt="">
+                                 </a>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                
+           
+          </div>
+
+               <div class="col-lg-4">
+                  <div class="blog_right_sidebar">
+                     <aside class="single_sidebar_widget search_widget">
+                        <form action="#">
+                           <div class="form-group">
+                              <div class="input-group mb-3">
+                                 <input type="text" class="form-control" placeholder='Search Keyword'
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
+                                 <div class="input-group-append">
+                                    <button class="btns" type="button"><i class="ti-search"></i></button>
+                                 </div>
+                              </div>
+                           </div>
+                           <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                              type="submit">Search</button>
+                        </form>
+                     </aside>
+                     <aside class="single_sidebar_widget popular_post_widget">
+                        <h3 class="widget_title" style="color: #2d2d2d;">Recent Post</h3>
+
+                        <% posts.forEach(function(post){ %>
+                        <div class="media post_item">
+                            <img src="/<%=post.images[0]%>" height =100px width=80px; alt="post">
+                            <div class="media-body">
+                                <a href="/<%=post._id%>">
+                                    <h3 style="color: #2d2d2d;" ><%=  post.name_of_item %>.</h3>
+                                </a>
+                                <p><%= post.updatedAt.toDateString() %></p>
+                            </div>
+                        </div>
+                        <% }) %>
+
+                    </aside>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!--================ Blog Area end =================-->
+   </main>
+   <footer>
+      <!--? Footer Start-->
+      <div class="footer-area section-bg" data-background="/assets/img/gallery/section_bg02.png">
+          <div class="container">
+              <div class="footer-top footer-padding">
+                  <div class="row d-flex justify-content-between">
+                      <div class="col-xl-4 col-lg-4 col-md-5 col-sm-8">
+                          <div class="single-footer-caption mb-50">
+                              <!-- logo -->
+                              <div class="footer-logo">
+                                  <a href="/"><img src="/assets/img/logo/logo2_footer.png" alt=""></a>
+                              </div>
+                          </div>
+                      </div>
+                  
+                      <div class="col-xl-2 col-lg-2 col-md-5 col-sm-6">
+                          <div class="single-footer-caption mb-50">
+                              <div class="footer-tittle">
+                                  <h4>Useful Links</h4>
+                                  <ul>
+                                     <% if(!currentuser){%>
+                                      <li><a href="#">Login</a></li>
+                                      <%}%>
+                                      <li><a href="#">Policy</a></li>
+                                      <li><a href="#">Terms & Conditions</a></li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+                   
+                  </div>
+              </div>
+              <div class="footer-bottom">
+                  <div class="row d-flex justify-content-between align-items-center">
+                      <div class="col-xl-9 col-lg-8">
+                          <div class="footer-copy-right">
+                              <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                          </div>
+                      </div>
+                      <div class="col-xl-3 col-lg-4">
+                          <!-- Footer Social -->
+                          <div class="footer-social f-right">
+                              <span>Follow Us</span>
+                          
+                              <a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a>
+                              
+                              <a href="#"><i class="fab fa-instagram"></i></a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- Footer End-->
+   </footer>
+   <!-- Scroll Up -->
+   <div id="back-top" >
+         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+   </div>
+
+   <!-- JS here -->
+
+   <script src="/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+   <!-- Jquery, Popper, Bootstrap -->
+   <script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
+   <script src="/assets/js/popper.min.js"></script>
+   <script src="/assets/js/bootstrap.min.js"></script>
+   <!-- Jquery Mobile Menu -->
+   <script src="/assets/js/jquery.slicknav.min.js"></script>
+
+   <!-- Jquery Slick , Owl-Carousel Plugins -->
+   <script src="/assets/js/owl.carousel.min.js"></script>
+   <script src="/assets/js/slick.min.js"></script>
+
+   <!-- One Page, Animated-HeadLin -->
+   <script src="/assets/js/wow.min.js"></script>
+   <script src="/assets/js/animated.headline.js"></script>
+   <script src="/assets/js/jquery.magnific-popup.js"></script>
+
+   <!-- Nice-select, sticky -->
+   <script src="/assets/js/jquery.nice-select.min.js"></script>
+   <script src="/assets/js/jquery.sticky.js"></script>
+      
+   <!-- contact js -->
+   <script src="/assets/js/contact.js"></script>
+   <script src="/assets/js/jquery.form.js"></script>
+   <script src="/assets/js/jquery.validate.min.js"></script>
+   <script src="/assets/js/mail-script.js"></script>
+   <script src="/assets/js/jquery.ajaxchimp.min.js"></script>
+      
+   <!-- Jquery Plugins, main Jquery -->	
+   <script src="/assets/js/plugins.js"></script>
+   <script src="/assets/js/main.js"></script>
+
+   </body>
+</html>

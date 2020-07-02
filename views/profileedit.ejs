@@ -1,9 +1,9 @@
-
+<!doctype html>
 <html class="no-js" lang="zxx">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>BPH Signup</title>
+    <title><%= currentuser.displayName%></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.ico">
@@ -21,11 +21,48 @@
     <link rel="stylesheet" href="/assets/css/nice-select.css">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/responsive.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+
+    <script type="text/javascript">
+    
+    function doEnable()
+    {
+        document.getElementById('firstname').readonly=false;
+        
+    }
+    
+    
+    
+    </script>
+    
+    
     <style>
         #box{
-            width:400px;
-            height:400px;
-            margin-left: 300px;
+            width:650px;
+            height:600px;
+            margin-left: 100px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            border: 1px black solid;
+            padding: 20px 20px 20px 20px;
+        }
+        #editicon{
+            margin-right: 5px;
+            margin-top: 5px;
+            float: right;
+            float: top;
+        }
+        #controls
+        {
+            float: right;
+            float: top;
+            margin-top: 5px;
+            margin-right: 5px;
         }
     </style>
     </head>
@@ -45,14 +82,13 @@
     <div class="logo" style="position: absolute; left: 50px; top: 10px;">
         <a href="/"><img src="/assets/img/logo/logo.png" alt=""></a>
     </div>
-      
       <main>
-        
+
                         <div class="row align-items-center">
+                            <!-- Logo -->
                             <div class="col-xl-2 col-lg-2 col-md-1">
-                               
+                                
                             </div>
-                            
                         
              
         
@@ -61,51 +97,79 @@
                             
         <div id=box>
             <br>
-            <h4 class="widget_title" style="color: #2d2d2d;">Signup</h4>
-            <br>
-                        <form action="/users/signup" method="POST">
-                                
-                                <div class="form-group">
-                                    <input type="text" class="form-control" onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = 'Enter First name'" placeholder='Enter First name' name="firstname" >
-                                </div>
-                            
-                                 <div class="form-group">
-                                     <input type="text" class="form-control" onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = 'Enter Last name'" placeholder='Enter Last name' name="lastname" >
-                                </div>
-                            
-                            
-                                <div class="form-group">
-                                    <input type="email" class="form-control" onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = 'Enter email'" placeholder='Enter email' name="username" required>
-                                </div>
-                               <div class="form-group">
-                                    <input type="password" class="form-control" onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = 'Enter password'" placeholder='Enter Password' name="password" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="tel"  class="form-control" onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = 'Enter Mobile'" placeholder='Enter Mobile' name="mobileno" minlength="10" maxlength="10" required>
-                                </div>
-                            
-                            
-                                <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                    type="submit">Register</button>
-            </form>
-            <a href="/users/google"><font  color="blue">Register with google</font></a>
-            <br>
             
+            <h4 class="widget_title" style="color: #2d2d2d;"><%=currentuser.displayName%></h4>
             <br>
-            <a href="/users/login"><font  color="blue">Already a member?  LogIn here</font></a>
+            <form action="/users/login" method="POST">
+               <div id=controls>
+                <br><div id="editicon">
+                    <input class="btn btn-success"  type="submit" value="Save" disabled>
+                </div>
+                <br><br><div id="editicon">
+                    <input class="btn btn-danger"  type="submit" value="Delete My Account">
+            </div>
+            <br><br><div id="editicon">
+                <input class="btn btn-secondary"  type="submit" value="Cancel">
+            </div>
+            </div>
+                <table>   
+                    <tr>
+                        <td style="padding-right: 10%;"><label for="#username">Username:</label></td>
+                        <td>
+                            <div class="form-group">
+                                <input type="email" class="form-control"  id="username" name="username" placeholder='<%= currentuser.username%>'' readonly required>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="#firstname">First Name:</label></td>
+                        <td>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="firstname" name="firstname" placeholder='<%= currentuser.firstname%>' readonly required>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="#lastname">Last Name:</label></td>
+                        <td>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="lastname" name="lastname" placeholder='<%= currentuser.lastname%>' readonly  required>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="#mobile">Mobile:</label></td>
+                        <td>
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="mobile" name="mobile" placeholder='<%= currentuser.mobileno%>' minlength="10" maxlength="10" readonly  required>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="#userphoto">User Photo:</label></td>
+                        <% if(currentuser.userphoto==''){%>
+                        <td>    
+                            <div class="form-group">
+                                <input type="file" class="form-control" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email'" id="userphoto" name="userphoto" placeholder='Enter email' disabled required>
+                            </div>
+                        </td>
+                        <%}%>
+                    </tr>               
+                </table>
+                <% if(currentuser.userphoto!=''){ console.log(currentuser.userphoto);%>
+                <a href='<%=currentuser.userphoto%>'> <img src ='<%=currentuser.userphoto%>' height="200" width="200"> </a>  
+                    
+                <%}%>
+                
+              
+            </form>
+           
+            <br>
+            <br>
+            <br>           
         </div>
-    </div>
+          </div>
     </main>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
     <footer>
         <!--? Footer Start-->
         <div class="footer-area section-bg" data-background="/assets/img/gallery/section_bg02.png">
@@ -126,13 +190,14 @@
                                 <div class="footer-tittle">
                                     <h4>Useful Links</h4>
                                     <ul>
-                                        <li><a href="/users/login">Login</a></li>
+                                        
                                         <li><a href="#">Policy</a></li>
                                         <li><a href="#">Terms & Conditions</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
+                        <!-- Instagram -->
                       
                     </div>
                 </div>
@@ -149,9 +214,9 @@
                             <!-- Footer Social -->
                             <div class="footer-social f-right">
                                 <span>Follow Us</span>
-                              
+                            
                                 <a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a>
-                              
+                               
                                 <a href="#"><i class="fab fa-instagram"></i></a>
                             </div>
                         </div>
