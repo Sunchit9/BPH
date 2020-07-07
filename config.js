@@ -97,12 +97,10 @@ passport.use(new GoogleStrategy({
                    user.displayName= profile.displayName;  
                    user.GoogleId =profile.id;
                    user.userphoto= profile._json.picture;
-                 user.save((err, user) => {
+                   user.save((err, user) => {
                    if (err) {
-                     console.log(err);
-                     
+                     console.log(err);                     
                    }
-                  
                  });
                }
              });

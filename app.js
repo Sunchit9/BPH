@@ -76,7 +76,7 @@ app.get('/failed', (req, res) => res.send('You Failed to log in!'))
 
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(__dirname + '/uploads'))
+app.use(express.static(__dirname + '/uploads'));
 
 
 

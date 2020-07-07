@@ -32,10 +32,25 @@
     
     function doEnable()
     {
-        document.getElementById('firstname').readonly=false;
+
+
+        document.getElementById("save").disabled=false;
         
     }
-    
+    function showphoto(file) {
+        document.getElementById('imageis').value= (file.value.substr(file.value.lastIndexOf('\\')+1,file.value.length));
+    if (file.files && file.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        $('#img').attr('src', e.target.result);
+       
+    }
+    reader.readAsDataURL(file.files[0]);
+    document.getElementById("save").disabled=false;
+
+    }
+
+}
     
     
     </script>
@@ -98,15 +113,19 @@
         <div id=box>
             <br>
             
-            <h4 class="widget_title" style="color: #2d2d2d;"><%=currentuser.displayName%></h4>
+            <h4 class="widget_title" style="color: #2d2d2d;">User Details</h4>
             <br>
-            <form action="/users/login" method="POST">
+            <%if( currentuser.GoogleId!=''){ console.log("google user");%>
+            <form action="/users/profile/<%=currentuser.id%>/edit" method="POST">
+            <%}else{ console.log("non google user");%>
+                <form action="/users/profile/<%=currentuser._id%>/edit" method="POST">
+            <%}%>
                <div id=controls>
                 <br><div id="editicon">
-                    <input class="btn btn-success"  type="submit" value="Save" disabled>
+                    <input class="btn btn-success"  type="submit" id="save" name="save" value="Save" disabled="true">
                 </div>
                 <br><br><div id="editicon">
-                    <input class="btn btn-danger"  type="submit" value="Delete My Account">
+                    <input class="btn btn-danger"  type="submit" id='delete' name='delete' value="Delete My Account">
             </div>
             <br><br><div id="editicon">
                 <input class="btn btn-secondary"  type="submit" value="Cancel">
@@ -115,9 +134,9 @@
                 <table>   
                     <tr>
                         <td style="padding-right: 10%;"><label for="#username">Username:</label></td>
-                        <td>
+                        <td style="padding-left: 5%;">
                             <div class="form-group">
-                                <input type="email" class="form-control"  id="username" name="username" placeholder='<%= currentuser.username%>'' readonly required>
+                                <p><%= currentuser.username%></p>
                             </div>
                         </td>
                     </tr>
@@ -125,7 +144,7 @@
                         <td><label for="#firstname">First Name:</label></td>
                         <td>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="firstname" name="firstname" placeholder='<%= currentuser.firstname%>' readonly required>
+                                <input type="text" class="form-control" id="firstname" name="firstname" placeholder='<%= currentuser.firstname%>' value='<%= currentuser.firstname%>' onclick="doEnable();" required>
                             </div>
                         </td>
                     </tr>
@@ -133,7 +152,7 @@
                         <td><label for="#lastname">Last Name:</label></td>
                         <td>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="lastname" name="lastname" placeholder='<%= currentuser.lastname%>' readonly  required>
+                                <input type="text" class="form-control" id="lastname" name="lastname" placeholder='<%= currentuser.lastname%>' value='<%= currentuser.lastname%>'  onclick="doEnable();" required>
                             </div>
                         </td>
                     </tr>
@@ -141,26 +160,38 @@
                         <td><label for="#mobile">Mobile:</label></td>
                         <td>
                             <div class="form-group">
-                                <input type="number" class="form-control" id="mobile" name="mobile" placeholder='<%= currentuser.mobileno%>' minlength="10" maxlength="10" readonly  required>
+                                <input type="tel"  class="form-control" onfocus="this.placeholder = ''"
+                                        onblur="this.placeholder = 'Enter Mobile'" value="<%= currentuser.mobileno%>" name="mobileno" minlength="10" maxlength="10" onclick="doEnable();">
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td><label for="#userphoto">User Photo:</label></td>
-                        <% if(currentuser.userphoto==''){%>
+                       <td>
+                           <input type="text" class="form-control" name="imageis" id="imageis" value="<%=currentuser.userphoto%>" readonly>
+                       </td>
                         <td>    
                             <div class="form-group">
-                                <input type="file" class="form-control" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email'" id="userphoto" name="userphoto" placeholder='Enter email' disabled required>
+                                <% if(currentuser.userphoto==''){%>
+                                <input type="file" class="form-control" id="userphoto" name="userphoto" onchange="showphoto(this);" >
+                                <%}else{%>
+                                    <div style="margin-left: 20px; margin-top: 5px; padding-left: 5px; padding-right: 5px; padding-top: 4px; border: 1px black solid; color:darkslategray; height: 30px; width: 63px;">
+                                    <input type="file"  id="userphoto" name="userphoto" class="hidden" onchange="showphoto(this);" accept="image/*" >
+                                    <label for="userphoto">Change</label>
+                                    </div>
+                                <%}%>
                             </div>
                         </td>
-                        <%}%>
+                        
+                        
                     </tr>               
                 </table>
-                <% if(currentuser.userphoto!=''){ console.log(currentuser.userphoto);%>
-                <a href='<%=currentuser.userphoto%>'> <img src ='<%=currentuser.userphoto%>' height="200" width="200"> </a>  
-                    
-                <%}%>
                 
+                <a href='<%=currentuser.userphoto%>'>
+                     <img src= "/<%=currentuser.userphoto%>" id="img" height="200" width="200"> </a>  
+                    
+                
+                                 
               
             </form>
            

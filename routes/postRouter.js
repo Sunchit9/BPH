@@ -39,9 +39,28 @@ postRouter.route('/')
         {
           res.statusCode =200;
           console.log(req.user);
-          
+          if(!req.user)
+          {
           res.render("./feed",{posts: allposts, currentuser: req.user});
-        }
+          }
+          else
+          {
+              if(req.user.provider!='google')
+              {
+                Users.findById(req.user._id,function(err,founduser){
+                    console.log(founduser);
+                    res.render('./feed',{posts: allposts,currentuser: founduser});
+                  })
+              }
+              else
+              {
+                  Users.find({GoogleId: req.user.id},function(err,founduser){
+                    console.log(founduser[0]);
+                    res.render("./feed",{posts: allposts, currentuser: founduser[0]});
+                  })
+              }
+          }
+    }
     })
     
 })
@@ -89,8 +108,30 @@ postRouter.route('/:id')
                 else
                 {
                   res.statusCode =200;
+                  console.log(req.user);
+                  if(!req.user)
+                  {
+                  res.render("./feedonepost",{post: foundpost, posts: allposts,currentuser: req.user});
+                  }
+                  else
+                  {
+                      if(req.user.provider!='google')
+                      {
+                        Users.findById(req.user._id,function(err,founduser){
+                            console.log(founduser);
+                            res.render('feedonepost',{post: foundpost, posts: allposts,currentuser: founduser});
+                          })
+                      }
+                      else
+                      {
+                          Users.find({GoogleId: req.user.id},function(err,founduser){
+                            console.log(founduser[0]);
+                            res.render('feedonepost',{post: foundpost, posts: allposts,currentuser: founduser[0]});
+                          })
+                      }
+                  }
                   
-                  res.render('feedonepost',{post: foundpost, posts: allposts,currentuser:req.user});
+                  
                 }
             })
            
@@ -155,7 +196,7 @@ postRouter.route('/:id/comment')
             }
             else
             {
-
+                console.log(req.user);
                 Users.find({GoogleId: req.user.id},function(err,founduser){
                     if(err)
                     consolo.log(err);
@@ -174,6 +215,7 @@ postRouter.route('/:id/comment')
                                 {
                                     console.log(founduser);
                                     console.log('hi-google');
+                                    comment.author.id= founduser[0]._id;
                                    comment.author.username = founduser[0].displayName;
                                    comment.author.userphoto = founduser[0].userphoto;
                                    comment.author.username

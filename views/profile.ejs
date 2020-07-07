@@ -28,17 +28,7 @@
 
 
 
-    <script type="text/javascript">
     
-    function doEnable()
-    {
-        document.getElementById('firstname').readonly=false;
-        
-    }
-    
-    
-    
-    </script>
     
     
     <style>
@@ -94,6 +84,12 @@
         
   
      <br>
+
+
+     <% if(currentuser){
+        console.log("current user is"); 
+        console.log(currentuser);
+     }%>
                             
         <div id=box>
             <br>
@@ -101,10 +97,12 @@
             <h4 class="widget_title" style="color: #2d2d2d;"><%=currentuser.displayName%></h4>
             <br>
                <div id=controls>
-                   
-                <div id="editicon"><a href="google">
+                 
+                <div id="editicon"><a href="<%= currentuser._id %>/edit">
                     <span class="glyphicon glyphicon-edit"></span> Edit
                   </a>
+               
+
                 </div>
                 <br>
                 <br>
@@ -147,14 +145,14 @@
                         <% if(currentuser.userphoto==''){%>
                         <td>    
                             <div class="form-group">
-                                <input type="file" class="form-control" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email'" id="userphoto" name="userphoto" placeholder='Enter email' disabled required>
+                                <input type="file" class="form-control"  id="userphoto" name="userphoto" placeholder='Enter photo' disabled required>
                             </div>
                         </td>
                         <%}%>
                     </tr>               
                 </table>
                 <% if(currentuser.userphoto!=''){ console.log(currentuser.userphoto);%>
-                <a href='<%=currentuser.userphoto%>'> <img src ='<%=currentuser.userphoto%>' height="200" width="200"> </a>  
+                <a> <img src ='/<%=currentuser.userphoto%>' height="200" width="200"> </a>  
                     
                 <%}%>
            

@@ -5,6 +5,25 @@ var authenticate = require('../config');
 const bodyParser = require('body-parser');
 var passport = require('passport');
 var User = require('../models/users');
+
+
+const multer =require('multer');
+const Comments = require('../models/comments');
+
+
+
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './uploads/');
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname);
+    }
+
+});
+const upload = multer({storage : storage}).single('userphoto');
+
 const isLoggedIn = (req, res, next) => {
   if (req.user) {
       next();
@@ -13,12 +32,90 @@ const isLoggedIn = (req, res, next) => {
   }
 }
 /* GET users listing. */
-router.get('/profile/:id/edit', function(req, res, next) {
-  res.render(profileedit,{currentuser: req.user})
-});
+router.route('/profile/:id/edit').
+get( function(req, res, next) {
+
+  if(req.user.provider!='google')
+  {
+    User.findById(req.user._id,function(err,founduser){
+      console.log(founduser);
+      res.render('profileedit',{currentuser:founduser});
+    })
+  }
+  else
+  {
+    User.find({GoogleId: req.user.id}, function(err,founduser){
+      if(err)
+      console.log(err);
+      else
+      {   
+        console.log('google user');
+        console.log(founduser[0]);
+        res.render('profileedit',{currentuser: founduser[0]});
+    }
+  })
+  }
+  
+})
+.post(function(req,res,next){
+  
+  console.log(req.body);
+  if(req.body.save=='Save')
+  {
+    upload(req,res,function(err) {
+    User.findById(req.params.id, function(err, user) {
+      if(!err) {
+          if(!user) {
+              res.send('User not found');
+          }          
+          var fn= req.body.firstname.substr(0,1).toUpperCase()+ req.body.firstname.substr(1,req.body.firstname.length);
+          var ln= req.body.lastname.substr(0,1).toUpperCase()+ req.body.lastname.substr(1,req.body.lastname.length);
+          user.firstname =fn;
+          user.lastname=ln;
+          user.displayName= fn+ ' '+ ln;
+          user.mobileno= req.body.mobileno;
+          if(user.userphoto!=req.body.imageis)
+          user.userphoto= '/'+req.body.imageis;
+          console.log(req.body.userphoto);
+          
+            if(err)
+            console.log(err)
+            else
+             {
+               user.save(function(err) {
+              if(!err) {
+                  console.log("user updated");
+                  res.redirect('/');
+              }
+              else {
+                  console.log("Error: could not save user " + err);
+              }
+             });
+             }
+          }
+          
+    })
+  })
+
+  }
+  else if(req.body.delete == 'Delete My Account')
+  {
+    User.findOneAndRemove({_id: req.params.id}, (err, response) => { 
+      Comments.remove({_id: { $in: req.body.eventsAttended }}, (err, res) => {
+         ...
+      })
+  })
+  }
+ } )
+
 router.get('/profile/:id', function(req, res, next) {
   if(req.user.provider!='google')
-  res.render('profile',{currentuser:req.user});
+  {
+    User.findById(req.user._id,function(err,founduser){
+      console.log(founduser);
+      res.render('profile',{currentuser:founduser});
+    })
+  }
   else
   {
     User.find({GoogleId: req.user.id}, function(err,founduser){

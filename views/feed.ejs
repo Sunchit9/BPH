@@ -55,7 +55,7 @@
                                     </div>
                                 <%}else{ if(currentuser.GoogleId==''){%>
                                     
-                                        <h4><a href='/users/profile/<%= currentuser._id %>'><%=currentuser.displayName%></a></h4>
+                                        <h4><a href='/users/profile/<%=currentuser._id%>'><%=currentuser.displayName%></a></h4>
                                         <%}else{%>
 
                                             <h4><a href='/users/profile/<%= currentuser.id %>'><%=currentuser.displayName%></a></h4>
