@@ -11,10 +11,6 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 
 exports.local=passport.use(new LocalStrategy(User.authenticate()));
-
-
-
-
 passport.serializeUser(function(user, done) {
     /*
     From the user take just the id (to minimize the cookie size) and just pass the id of the user
@@ -23,8 +19,7 @@ passport.serializeUser(function(user, done) {
     */
     done(null, user);
   });
-  
-passport.deserializeUser(function(user, done) {
+  passport.deserializeUser(function(user, done) {
     /*
     Instead of user this function usually recives the id 
     then you use the id to select the user from the db and pass the user obj to the done callback
@@ -73,6 +68,7 @@ passport.use(new GoogleStrategy({
      If yes select the user and pass him to the done callback
      If not create the user and then select him and pass to callback
     */
+
     console.log('******************************');
     console.log(profile);
     User.find({GoogleId: profile.id}, function(err, founduser){
@@ -84,6 +80,7 @@ passport.use(new GoogleStrategy({
          
            if(founduser.length==0)
            {
+             
             
                User.register(new User({username: profile.emails[0].value}), 
                profile.id,(err, user) => {

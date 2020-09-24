@@ -143,6 +143,7 @@ postRouter.route('/:id')
 
 
 
+
 postRouter.route('/:id/comment')
 .post((req, res, next) =>{
     console.log("GET on a POST");
